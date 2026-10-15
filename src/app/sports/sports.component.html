@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+     <table class="table table-striped">
+        <tr> <th>N°</th><th>Id</th><th>Nom</th> <th>Catégorie</th> <th>Niveau</th> <th>Joueurs par équipe</th> <th>Date Création</th> <th>Groupe</th> <th>Description</th> <th colspan="2">Actions</th> </tr>
+         @for (sport of sports; track sport.idSport; let index =$index; let nbr=$count; let first = $first; let last = $last)
+         {
+           @if(first)
+          {  <h1>Nombre de sports : {{nbr}}</h1>}
+
+          <tbody >
+            <tr >
+               <td>{{index}}</td>
+               <td>{{sport.idSport}}</td>
+               <td>{{sport.nomSport}}</td>
+               <td>{{sport.categorieSport}}</td>
+               <td>{{sport.niveauSport}}</td>
+               <td>{{sport.nombreJoueurs}}</td>
+               <td>{{sport.dateCreation | date:'dd/MM/yyyy'}}</td>
+               <td>{{sport.groupeSport?.nomgrp}}</td>
+               <td>{{sport.descriptionSport}}</td>
+               <td><a class="btn btn-danger" (click)="supprimerSport(sport)">Supprimer</a></td>
+               <td><a class="btn btn-success" [routerLink]="['/updateSport',sport.idSport]">Modifier</a></td>
+             </tr>
+          </tbody>
+         }
+
+         @empty {
+          <h1>Aucun sport trouvé !</h1>
+         }
+
+    </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="container">
+    <div>
+      <h2>Modifier un Sport :</h2>
+    </div>
+         <form #f="ngForm">
+             <div class="col-sm-2 col-md-2 col-lg-2">
+               <label >ID Sport</label>
+               <input readonly type="number" [(ngModel)]="currentSport.idSport"
+                   name="idSport" class="form-control">
+              </div>
+
+             <div class="col-sm-4 col-md-4 col-lg-4" >
+               <label >Nom du sport</label>
+               <input type="text" [(ngModel)]="currentSport.nomSport"
+                   name="nomSport" class="form-control" placeholder="Ex : Football">
+             </div>
+
+             <div class="col-sm-4 col-md-4 col-lg-4">
+               <label >Catégorie</label>
+               <select [(ngModel)]="currentSport.categorieSport" name="categorieSport" class="form-select">
+                 <option value="Collectif">Collectif</option>
+                 <option value="Individuel">Individuel</option>
+                 <option value="Raquette">Raquette</option>
+                 <option value="Aquatique">Aquatique</option>
+                 <option value="Combat">Combat</option>
+               </select>
+             </div>
+
+             <div class="col-sm-4 col-md-4 col-lg-4">
+               <label >Niveau</label>
+               <select [(ngModel)]="currentSport.niveauSport" name="niveauSport" class="form-select">
+                 <option value="Débutant">Débutant</option>
+                 <option value="Intermédiaire">Intermédiaire</option>
+                 <option value="Avancé">Avancé</option>
+               </select>
+             </div>
+
+             <div class="col-sm-2 col-md-2 col-lg-2">
+               <label >Joueurs par équipe</label>
+               <input type="number" min="1" [(ngModel)]="currentSport.nombreJoueurs"
+                   name="nombreJoueurs" class="form-control">
+             </div>
+
+             <div class="col-sm-4 col-md-4 col-lg-4">
+               <label >Date de création</label>
+               <input type="date" [ngModel]="currentSport.dateCreation | date: 'yyyy-MM-dd'"
+                   (ngModelChange)="currentSport.dateCreation = $event" name="dateCreation"
+                   class="form-control">
+             </div>
+
+             <div class="col-sm-8 col-md-8 col-lg-8">
+               <label >Description</label>
+               <textarea rows="3" [(ngModel)]="currentSport.descriptionSport"
+                   name="descriptionSport" class="form-control"
+                   placeholder="Décrivez brièvement le sport"></textarea>
+             </div>
+
+             <div class="col-sm-4 col-md-4 col-lg-4">
+               <label >Groupe</label>
+               <select [(ngModel)]="updatedIdgrp" name="groupeSport" class="form-select" required>
+                 @for (grp of groupes; track grp.idgrp) {
+                   <option [ngValue]="grp.idgrp">{{grp.nomgrp}}</option>
+                 }
+               </select>
+             </div>
+
+              <div class="mt-2">
+<button type="submit"  (click)="updateSport()" [disabled]="f.invalid" class="btn btn-success">Modifier</button>
+              </div>
+         </form>
+</div>
