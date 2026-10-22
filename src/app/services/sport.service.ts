@@ -89,5 +89,14 @@ consulterGroupe(id:number): Groupe{
 return this.groupes.find(grp => grp.idgrp == id)!;
 }
 
+rechercherParGroupe(idgrp: number): Sport[] {
+  return this.sports.filter(s => s.groupeSport?.idgrp == idgrp);
+}
+
+rechercherParNom(nom: string): Sport[] {
+  const term = (nom ?? '').trim().toLowerCase();
+  return this.sports.filter(s => s.nomSport?.toLowerCase().includes(term));
+}
+
 
   }

@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h4>Rechercher les sports par groupe</h4>
+
+      <select class="form-select mb-3" [(ngModel)]="idGroupe" (change)="onChange()">
+        <option [ngValue]="0">Tous les groupes</option>
+        @for (g of groupes; track g.idgrp) {
+          <option [ngValue]="g.idgrp">{{ g.nomgrp }}</option>
+        }
+      </select>
+
+      <table class="table table-striped">
+        <tr>
+          <th>Id</th><th>Nom</th><th>Catégorie</th><th>Niveau</th>
+          <th>Joueurs par équipe</th><th>Date Création</th><th>Groupe</th>
+        </tr>
+        @for (sport of sports; track sport.idSport) {
+          <tr>
+            <td>{{ sport.idSport }}</td>
+            <td>{{ sport.nomSport }}</td>
+            <td>{{ sport.categorieSport }}</td>
+            <td>{{ sport.niveauSport }}</td>
+            <td>{{ sport.nombreJoueurs }}</td>
+            <td>{{ sport.dateCreation | date:'dd/MM/yyyy' }}</td>
+            <td>{{ sport.groupeSport?.nomgrp }}</td>
+          </tr>
+        } @empty {
+          <tr><td colspan="7">Aucun sport trouvé pour ce groupe !</td></tr>
+        }
+      </table>
+    </div>
+  </div>
+</div>

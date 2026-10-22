@@ -1,0 +1,69 @@
+<div class="container">
+
+  <!-- 2) Recherche par nom en utilisant une api (service) -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h4>2) Recherche par nom : via l'api (service)</h4>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Nom du sport..."
+               [(ngModel)]="nomApi" (keyup.enter)="rechercherParApi()">
+        <button class="btn btn-primary" type="button" (click)="rechercherParApi()">Rechercher</button>
+      </div>
+      <table class="table table-striped">
+        <tr><th>Id</th><th>Nom</th><th>Catégorie</th><th>Niveau</th><th>Groupe</th></tr>
+        @for (sport of resultatsApi; track sport.idSport) {
+          <tr>
+            <td>{{ sport.idSport }}</td><td>{{ sport.nomSport }}</td>
+            <td>{{ sport.categorieSport }}</td><td>{{ sport.niveauSport }}</td>
+            <td>{{ sport.groupeSport?.nomgrp }}</td>
+          </tr>
+        } @empty {
+          <tr><td colspan="5">Aucun sport trouvé !</td></tr>
+        }
+      </table>
+    </div>
+  </div>
+
+  <!-- 3) Recherche par nom en utilisant l'évènement keyup -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h4>3) Recherche par nom : évènement keyup</h4>
+      <input type="text" class="form-control mb-3" placeholder="Tapez le nom du sport..."
+             [(ngModel)]="nomKeyup" (keyup)="rechercherParKeyup()">
+      <table class="table table-striped">
+        <tr><th>Id</th><th>Nom</th><th>Catégorie</th><th>Niveau</th><th>Groupe</th></tr>
+        @for (sport of resultatsKeyup; track sport.idSport) {
+          <tr>
+            <td>{{ sport.idSport }}</td><td>{{ sport.nomSport }}</td>
+            <td>{{ sport.categorieSport }}</td><td>{{ sport.niveauSport }}</td>
+            <td>{{ sport.groupeSport?.nomgrp }}</td>
+          </tr>
+        } @empty {
+          <tr><td colspan="5">Aucun sport trouvé !</td></tr>
+        }
+      </table>
+    </div>
+  </div>
+
+  <!-- 4) Recherche par nom en utilisant un pipe -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h4>4) Recherche par nom : pipe</h4>
+      <input type="text" class="form-control mb-3" placeholder="Tapez le nom du sport..."
+             [(ngModel)]="nomPipe">
+      <table class="table table-striped">
+        <tr><th>Id</th><th>Nom</th><th>Catégorie</th><th>Niveau</th><th>Groupe</th></tr>
+        @for (sport of allSports | searchFilter:nomPipe; track sport.idSport) {
+          <tr>
+            <td>{{ sport.idSport }}</td><td>{{ sport.nomSport }}</td>
+            <td>{{ sport.categorieSport }}</td><td>{{ sport.niveauSport }}</td>
+            <td>{{ sport.groupeSport?.nomgrp }}</td>
+          </tr>
+        } @empty {
+          <tr><td colspan="5">Aucun sport trouvé !</td></tr>
+        }
+      </table>
+    </div>
+  </div>
+
+</div>
